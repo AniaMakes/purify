@@ -19,9 +19,7 @@ function absolute(numbers){
   // for(var i = 0; i < numbers.length; i++){
   //   numbers[i] = +numbers[i];
   // }
-  console.log(numbers);
   const absolutely = numbers.map(x => Math.abs(x) );
-  console.log(absolutely);
   return absolutely;
 
 }
@@ -36,32 +34,67 @@ module.exports.absolute = absolute;
 // concatenate first and last names and return
 // resulting array of names
 function concatNames(names){
-  for(var i = 0; i < names.length; i++){
-    names[i] = `${names[i].firstName} ${names[i].lastName}`;
-  }
-  return names;
+  return names.map( nameObj => nameObj.firstName + " " + nameObj.lastName);
+
 }
+//   for(var i = 0; i < names.length; i++){
+//     names[i] = `${names[i].firstName} ${names[i].lastName}`;
+//   }
+//   return names;
+// }
+
+module.exports.concatNames = concatNames;
+
+
+
+
 
 // things is an array of numbers and strings. Convert
 // numbers in array to strings. For example 5 to "5"
 function numbersToStrings(things){
-  for(var i = 0; i < things.length; i++){
-    things[i] = typeof things[i] === 'number' ? things[i]+'' : things[i];
-  }
+  return things.map(function(thing){
+      if(typeof(thing) == "string"){
+        return thing;
+      }else{
+        return thing.toString();
+      }
+   });
 }
+
+  // for(var i = 0; i < things.length; i++){
+  //   things[i] = typeof things[i] === 'number' ? things[i]+'' : things[i];
+  // }
+// return numbersToStrings;
+
+// }
+
+
+module.exports.numbersToStrings = numbersToStrings;
+
+
 
 // strings is an array of strings. sort them by length
 function sortByLength(strings){
-  strings.sort(function(a,b){
+  let outputArray = [].concat(strings);
+
+  outputArray.sort(function(a,b){
     return a.length - b.length;
   });
+  return outputArray;
 }
+
+module.exports.sortByLength = sortByLength;
+
+
 
 // numbers is an array of numbers. Get last two numbers
 // from numbers
 function lastTwo(numbers){
-  return numbers.splice(-2);
+  let outputArray = [].concat(numbers);
+  return outputArray.splice(-2);
 }
+
+module.exports.lastTwo = lastTwo;
 
 // cars is an array of car objects which look like
 // this
@@ -72,11 +105,22 @@ function lastTwo(numbers){
 // }
 // increment the years by one year for all cars
 function incrementYear(cars){
-  for(var i = 0; i < cars.length; i++){
-    cars[i].year++;
+  let newCars = [].concat(cars);
+  let mapped = newCars.map(function (carObject){
+    carObject.year = carObject.year + 1;
+    return carObject;
+  });
+  return mapped;
   }
-  return cars;
-}
+
+  module.exports.incrementYear = incrementYear;
+
+
+//   for(var i = 0; i < cars.length; i++){
+//     cars[i].year++;
+//   }
+//   return cars;
+// }
 
 // sales is an object where the key is
 // the salespersons name and the value
